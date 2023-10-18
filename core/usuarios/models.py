@@ -1,4 +1,5 @@
 from ast import Raise
+from random import choices
 from unittest.mock import Base
 from venv import create
 from django.db import models
@@ -111,3 +112,47 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self) -> str:
         return self.nome
+
+
+class Endereco(models.Model):
+    usuario = models.OneToOneField(Usuario, on_delete=models.CASCADE)
+    cep = models.CharField(max_length=9, unique=False, blank=False, null=False)
+    logradouro = models.CharField(max_length=255)
+    numero = models.IntegerField()
+    apartamento = models.CharField(max_length=20, null=True, blank=True)
+    bairro = models.CharField(max_length=255)
+    cidade = models.CharField(max_length=255)
+
+
+class Informações(models.Model):
+    RENDA_CHOIES = [
+        ("R$ 0.0 - R$ 1.000.00", "R$ 0.0 - R$ 1.000.00"),
+        ("R$ 1.000.00 - R$ 5.000.00", "R$ 1.000.00 - R$ 5.000.00"),
+        ("R$ 5.000.00 - R$ 15.000.00", "R$ 5.000.00 - R$ 15.000.00"),
+        ("Maior que R$ 20.000.00", "Maior que R$ 20.000.00"),
+    ]
+    DESPESAS_CHOICES = [
+        ("R$ 0.0 - R$ 1.000.00", "R$ 0.0 - R$ 1.000.00"),
+        ("R$ 1.000.00 - R$ 5.000.00", "R$ 1.000.00 - R$ 5.000.00"),
+        ("R$ 5.000.00 - R$ 15.000.00", "R$ 5.000.00 - R$ 15.000.00"),
+        ("Maior que R$ 20.000.00", "Maior que R$ 20.000.00"),
+    ]
+    MEMBROS_FAMILIA_CHOICES = [
+        ("Até 5 Membros", "Até 5 Membros"),
+        ("Até 10 Membros", "Até 10 Membros"),
+        ("Mais que 10", "Mais que 10"),
+    ]
+    ESCOLARIDADE_CHOICES = [
+        ("Ensino Fundamental Incompleto", "Ensino Fundamental Incompleto"),
+        ("Ensino Médio Incompleto", "Ensino Médio Incompleto"),
+        ("Ensino Médio Completo", "Ensino Médio Completo"),
+        ("Cursando Faculdade", "Cursando Faculdade"),
+        ("Curso Superior Completo", "Curso Superior Completo"),
+    ]
+    usuario = models.OneToOneField(Usuario, on_delete=models.CASCADE)
+    renda_familiar = models.CharField(max_length=100, choices=RENDA_CHOIES)
+    numero_membros_familia = models.CharField(
+        max_length=100, choices=MEMBROS_FAMILIA_CHOICES
+    )
+    despesas_mensais = models.CharField(max_length=100, choices=DESPESAS_CHOICES)
+    nivel_escolaridade = models.CharField(max_length=150, choices=ESCOLARIDADE_CHOICES)
