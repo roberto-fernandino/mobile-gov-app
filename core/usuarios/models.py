@@ -1,7 +1,3 @@
-from ast import Raise
-from random import choices
-from unittest.mock import Base
-from venv import create
 from django.db import models
 from django.contrib.auth.models import (
     BaseUserManager,
