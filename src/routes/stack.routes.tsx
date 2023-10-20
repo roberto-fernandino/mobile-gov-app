@@ -3,7 +3,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import LoginApp from '../screens/Login';
 import HomeApp from '../screens/Home';
-
+import ProfileApp from '../screens/Perfil';
 const Stack = createNativeStackNavigator();
 
 export default function StackComponent() {
@@ -20,6 +20,11 @@ export default function StackComponent() {
         options={{
           headerTitle: 'Menu Principal',
         }}
+      />
+      <Stack.Screen
+        name="Profile"
+        component={ProfileApp}
+        options={{headerTitle: 'Perfil'}}
       />
     </Stack.Navigator>
   );
