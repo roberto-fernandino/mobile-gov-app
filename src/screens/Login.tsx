@@ -100,6 +100,12 @@ const LoginApp = ({navigation}) => {
             <Text style={styles.submitText}> Login </Text>
           </TouchableOpacity>
         )}
+        <Text style={{margin: 20}}>Ainda nãp tem conta?</Text>
+        <TouchableOpacity
+          style={styles.signupButton}
+          onPress={() => navigation.navigate('Cadastro')}>
+          <Text style={styles.submitText}>Cadastrar</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -150,6 +156,13 @@ const styles = StyleSheet.create({
   },
   buttonSubmitContainer: {
     alignItems: 'center',
+  },
+  signupButton: {
+    width: 150,
+    backgroundColor: '#48ad44',
+    height: 42,
+    alignItems: 'center',
+    borderRadius: 10,
   },
 });
 
