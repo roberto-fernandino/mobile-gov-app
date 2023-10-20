@@ -21,7 +21,8 @@ def login_usuario(request):
     if user is not None:
         if user.is_authenticated:
             serialier = UsuarioSerializer(user)
-            return Response(serialier.data)
+            response = {"detail": "logado", "usuario": serialier.data}
+            return Response(response)
         else:
             return Response(
                 {
