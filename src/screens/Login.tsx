@@ -14,6 +14,7 @@ const LoginApp = ({navigation}) => {
   const [cpf, setCpf] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [isFormInvalid, setIsFormInvalid] = useState(false);
 
   const formatCpf = (inputCpf: string) => {
     const numbers = inputCpf.replace(/\D/g, '');
@@ -51,14 +52,14 @@ const LoginApp = ({navigation}) => {
       .then(response => {
         if (!response.ok) {
           console.log('HTTP ERORR! status: ', response.status);
+          setIsFormInvalid(true);
         }
         return response.json();
       })
       .then(data => {
         console.log('Data: ', data);
-        console.log('detail: ', data.detail);
         if (data.detail === 'logado') {
-          handleLogin(data.usuario);
+          handleLogin(data);
         }
       })
       .catch(error => {
@@ -74,6 +75,10 @@ const LoginApp = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Image style={styles.img} source={require('../img/gov.png')} />
+
+      <Text style={styles.invalidForm}>
+        {isFormInvalid ? '❌ cpf ou senha errados ❌' : ''}
+      </Text>
       <View style={styles.formContainer}>
         <Text style={styles.inputLabel}>cpf</Text>
         <TextInput
@@ -100,7 +105,7 @@ const LoginApp = ({navigation}) => {
             <Text style={styles.submitText}> Login </Text>
           </TouchableOpacity>
         )}
-        <Text style={{margin: 20}}>Ainda nãp tem conta?</Text>
+        <Text style={{margin: 20}}>Ainda não tem conta?</Text>
         <TouchableOpacity
           style={styles.signupButton}
           onPress={() => navigation.navigate('Cadastro')}>
@@ -163,6 +168,10 @@ const styles = StyleSheet.create({
     height: 42,
     alignItems: 'center',
     borderRadius: 10,
+  },
+  invalidForm: {
+    color: 'red',
+    fontSize: 20,
   },
 });
 
