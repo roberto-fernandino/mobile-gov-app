@@ -2,15 +2,15 @@ import React from 'react';
 import {StyleSheet, View, Text, Button} from 'react-native';
 
 const HomeApp = ({navigation, route}) => {
-  const {usuario_data} = route.params;
+  const {usuario_data: data} = route.params;
   const goProfile = () => {
-    console.log('usuario_data: ', usuario_data);
-    navigation.navigate('Profile', {usuario_data});
+    console.log('usuario_data: ', data);
+    navigation.navigate('Profile', {usuario_data: data});
   };
 
   return (
     <View style={styles.headerContainer}>
-      <Text style={styles.header}>Bem vindo de volta {usuario_data.nome}!</Text>
+      <Text style={styles.header}>Bem vindo de volta {data.usuario.nome}!</Text>
       <Button title="Perfil" onPress={goProfile} />
     </View>
   );
