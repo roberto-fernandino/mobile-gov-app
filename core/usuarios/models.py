@@ -113,11 +113,11 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
 class Endereco(models.Model):
     usuario = models.OneToOneField(Usuario, on_delete=models.CASCADE)
     cep = models.CharField(max_length=9, unique=False, blank=False, null=False)
-    logradouro = models.CharField(max_length=255)
-    numero = models.IntegerField()
-    apartamento = models.CharField(max_length=20, null=True, blank=True)
-    bairro = models.CharField(max_length=255)
-    cidade = models.CharField(max_length=255)
+    logradouro = models.CharField(max_length=255, blank=False, null=False)
+    numero = models.IntegerField(null=False, blank=False)
+    complemento = models.CharField(max_length=20, null=True, blank=True)
+    bairro = models.CharField(max_length=255, blank=False, null=False)
+    cidade = models.CharField(max_length=255, blank=False, null=False)
 
 
 class Informações(models.Model):
@@ -146,7 +146,7 @@ class Informações(models.Model):
         ("Curso Superior Completo", "Curso Superior Completo"),
     ]
     usuario = models.OneToOneField(Usuario, on_delete=models.CASCADE)
-    renda_familiar = models.CharField(max_length=100, choices=RENDA_CHOIES)
+    renda = models.CharField(max_length=100, choices=RENDA_CHOIES)
     numero_membros_familia = models.CharField(
         max_length=100, choices=MEMBROS_FAMILIA_CHOICES
     )

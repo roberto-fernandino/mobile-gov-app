@@ -1,18 +1,12 @@
 from urllib import response
 from rest_framework.decorators import api_view
 from rest_framework import status
-from .serializers import UsuarioSerializer
+from .serializers import UsuarioSerializer, EnderecoSerializer, InformacoesSerializer
 from rest_framework.response import Response
 from django.contrib.auth import authenticate
-
-"""{
-    "cpf":"701.136.996-11",
-    "password": "dulce2014"
-}
-"""
+from usuarios.models import Usuario, Endereco, Informações
 
 
-# Serializers here
 @api_view(["POST"])
 def login_usuario(request):
     cpf = request.data.get("cpf")
@@ -20,8 +14,17 @@ def login_usuario(request):
     user = authenticate(cpf=cpf, password=password)
     if user is not None:
         if user.is_authenticated:
-            serialier = UsuarioSerializer(user)
-            response = {"detail": "logado", "usuario": serialier.data}
+            endereco = Endereco.objects.get(usuario=user)
+            informacoes = Informações.objects.get(usuario=user)
+            user_serialier = UsuarioSerializer(user)
+            endereco_serializer = EnderecoSerializer(endereco)
+            informacoes_serializer = InformacoesSerializer(informacoes)
+            response = {
+                "detail": "logado",
+                "usuario": user_serialier.data,
+                "endereco": endereco_serializer.data,
+                "informacoes": informacoes_serializer.data,
+            }
             return Response(response)
         else:
             return Response(
@@ -40,8 +43,60 @@ def login_usuario(request):
 
 
 @api_view(["POST"])
-def postUsuario(request):
-    serializer = UsuarioSerializer(request.data)
-    if serializer.is_valid():
-        serializer.save()
-    return Response(serializer.data)
+def add_user(request):
+    cpf = request.data.get("cpf")
+    email = request.data.get("email")
+    data_nascimento = request.data.get("dataNascimento")
+    nome = request.data.get("nome")
+    sobrenome = request.data.get("sobrenome")
+    password = request.data.get("password")
+    cep = request.data.get("cep")
+    logradouro = request.data.get("logradouro")
+    numero = request.data.get("numero")
+    bairro = request.data.get("bairro")
+    cidade = request.data.get("cidade")
+    renda = request.data.get("renda")
+    gasto = request.data.get("gasto")
+    numero_de_familiares = request.data.get("familia")
+    escolaridade = request.data.get("escolaridade")
+    complemento = (
+        request.data.get("complemento")
+        if request.data.get("complemento") != None
+        else None
+    )
+    nascimento_tratado = data_nascimento.split("T")[0]
+    new_user = Usuario.objects.create_user(
+        cpf=cpf,
+        email=email,
+        data_nascimento=nascimento_tratado,
+        nome=nome,
+        sobrenome=sobrenome,
+        password=password,
+    )
+    if new_user:
+        Endereco.objects.create(
+            cep=cep,
+            usuario=new_user,
+            logradouro=logradouro,
+            numero=numero,
+            complemento=complemento,
+            bairro=bairro,
+            cidade=cidade,
+        )
+        Informações.objects.create(
+            usuario=new_user,
+            renda=renda,
+            numero_membros_familia=numero_de_familiares,
+            despesas_mensais=gasto,
+            nivel_escolaridade=escolaridade,
+        )
+        serializer = UsuarioSerializer(new_user)
+
+        return Response(
+            {"detail": "Usuario criado", "usuario": serializer.data},
+            status=status.HTTP_201_CREATED,
+        )
+    return Response(
+        {"detail": "Usuario não criado, informações inválidas."},
+        status=status.HTTP_400_BAD_REQUEST,
+    )
