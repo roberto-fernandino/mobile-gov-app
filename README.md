@@ -1,8 +1,10 @@
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+By the i used [**Django Rest Framework**](https://www.django-rest-framework.org/) to build the api behind the scenes.
 
 # Getting Started
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+> **Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+> Make sure you have at least 3.11.4 python version installed.
 
 ## Step 1: Start the Metro Server
 
@@ -18,15 +20,45 @@ npm start
 yarn start
 ```
 
+Second, you will need to apply the migrations and commit it to the database to make everything work.
+
+This can be made with **Django**, from the _root_, running:
+
+```bash
+# Installing dependencies (just copy and paste if you are in any linux distro which you should fucking be)
+# If you are on windows do the same with windows commands
+
+python -m venv env
+
+source /env/bin/activate # for linux (which you should be using as you are probably a fucking developer).
+source /env/bin/activate.ps1 # for windows (powershell) ! NOT RECOMMENDED ! Windows is useless for DEVS.
+pip install -r requirements.txt
+
+# Applying migrations and migrating
+python core/manage.py makemigrations
+python core/manage.py migrate
+python core/manage.py createsuperuser # to create a super user to access admin page in (http://<dominio>/admin)
+```
+
 ## Step 2: Start your Application
 
 Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+Start the django [**DRF**](https://www.django-rest-framework.org/)
+
+### Starting the API server
+
+```bash
+# Start the server
+python core/manage.py runserver
+```
+
+Now you can access API admin page from [**this link**](http://127.0.0.1:8000/admin).
 
 ### For Android
 
 ```bash
-# using npm
-npm run android
+# using npm (npx)
+npx react-native run-android
 
 # OR using Yarn
 yarn android
@@ -46,23 +78,9 @@ If everything is set up _correctly_, you should see your new app running in your
 
 This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
 
-## Step 3: Modifying your App
-
-Now that you have successfully run the app, let's modify it.
-
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
-
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
-
 ## Congratulations! :tada:
 
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
+You've successfully run my React Native App. :partying_face:
 
 # Troubleshooting
 
