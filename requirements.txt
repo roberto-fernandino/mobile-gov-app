@@ -4,5 +4,8 @@ django-filter==23.3
 django-jazzmin==2.6.0
 djangorestframework==3.14.0
 Markdown==3.5
+Pillow==10.1.0
+PyPDF2==3.0.1
 pytz==2023.3.post1
+reportlab==4.0.6
 sqlparse==0.4.4
