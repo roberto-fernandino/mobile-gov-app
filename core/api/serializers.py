@@ -29,5 +29,5 @@ class EnderecoSerializer(serializers.ModelSerializer):
 # Serializers
 class UsuarioSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = ["cpf", "nome", "sobrenome", "email", "data_nascimento"]
+        fields = ["id", "cpf", "nome", "sobrenome", "email", "data_nascimento"]
         model = Usuario
