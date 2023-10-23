@@ -7,6 +7,8 @@ from django.contrib.auth import authenticate
 from usuarios.models import Usuario, Endereco, Informações
 from usuarios.pdf_generator import create_pdf
 from pathlib import Path
+from django.conf import settings
+from django.http import FileResponse
 
 
 @api_view(["POST"])
@@ -106,6 +108,8 @@ def add_user(request):
 
 @api_view(["GET"])
 def generate_pdf(request, user_id):
+    ROOT_DIR = settings.BASE_DIR.parent
+    print(ROOT_DIR)
     user_info = {}
     usuario = Usuario.objects.get(id=6)
     informacoes = Informações.objects.get(usuario=usuario)
@@ -119,6 +123,10 @@ def generate_pdf(request, user_id):
     user_info.update(informacoes_serializer.data)
     user_info.update(endereco_serializer.data)
 
-    image_path = Path("../../src/img/gov.png")
-    save_path = Path("./pdf/")
-    create_pdf(save_path, image_path, user_info)
+    image_path = Path(ROOT_DIR / "src" / "img" / "gov1.png")
+    save_path = Path(ROOT_DIR / "core" / "usuarios" / "pdf")
+    pdf_path = create_pdf(save_path, image_path, user_info)
+    pdf = open(pdf_path, "rb")
+    response = FileResponse(pdf, content_type="application/pdf")
+    response["Content-Disposition"] = f'attachment; filename="{pdf_path.name}"'
+    return response
