@@ -5,6 +5,8 @@ from .serializers import UsuarioSerializer, EnderecoSerializer, InformacoesSeria
 from rest_framework.response import Response
 from django.contrib.auth import authenticate
 from usuarios.models import Usuario, Endereco, Informações
+from usuarios.pdf_generator import create_pdf
+from pathlib import Path
 
 
 @api_view(["POST"])
@@ -100,3 +102,23 @@ def add_user(request):
         {"detail": "Usuario não criado, informações inválidas."},
         status=status.HTTP_400_BAD_REQUEST,
     )
+
+
+@api_view(["GET"])
+def generate_pdf(request, user_id):
+    user_info = {}
+    usuario = Usuario.objects.get(id=6)
+    informacoes = Informações.objects.get(usuario=usuario)
+    endereco = Endereco.objects.get(usuario=usuario)
+
+    user_serializer = UsuarioSerializer(usuario)
+    informacoes_serializer = InformacoesSerializer(informacoes)
+    endereco_serializer = EnderecoSerializer(endereco)
+
+    user_info.update(user_serializer.data)
+    user_info.update(informacoes_serializer.data)
+    user_info.update(endereco_serializer.data)
+
+    image_path = Path("../../src/img/gov.png")
+    save_path = Path("./pdf/")
+    create_pdf(save_path, image_path, user_info)
