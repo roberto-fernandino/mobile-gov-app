@@ -111,7 +111,7 @@ def generate_pdf(request, user_id):
     ROOT_DIR = settings.BASE_DIR.parent
     print(ROOT_DIR)
     user_info = {}
-    usuario = Usuario.objects.get(id=6)
+    usuario = Usuario.objects.get(id=user_id)
     informacoes = Informações.objects.get(usuario=usuario)
     endereco = Endereco.objects.get(usuario=usuario)
 
