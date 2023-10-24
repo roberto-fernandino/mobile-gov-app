@@ -1,5 +1,5 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
-By the i used [**Django Rest Framework**](https://www.django-rest-framework.org/) to build the api behind the scenes.
+This is a  [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+By the way i used [**Django Rest Framework**](https://www.django-rest-framework.org/) to build the api behind the scenes.
 
 # Getting Started
 
