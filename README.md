@@ -25,7 +25,7 @@ rm node_modules/rn-fetch-blob/react-native.config.js
 
  # And finally
 npm cache clean -f
-npx react-native start --reset-cache
+
 ```
 
 
@@ -37,8 +37,10 @@ First, you will need to start **Metro**, the JavaScript _bundler_ that ships _wi
 To start Metro, run the following command from the _root_ of your React Native project:
 
 ```bash
+
 # using npm (npx is the npx executioner built for react applications)
-npx react-native start
+npx react-native start --reset-cache # To already clear cache.
+
 # if ask to install dependencies press (Y) and ENTER for all them.
 
 # OR using Yarn
@@ -47,7 +49,7 @@ yarn start
 
 Second, you will need to apply the migrations and commit it to the database to make everything work.
 
-This can be made with **Django**, from the _root_, running:
+This can be made with **Django** _the python framework_, from the _root_, running:
 
 ```bash
 # Installing dependencies (just copy and paste if you are in any linux distro which you should fucking be)
@@ -82,11 +84,17 @@ Now you can access API admin page from [**this link**](http://127.0.0.1:8000/adm
 ### For Android
 
 ```bash
+# I recommend already run the android emulator and check if ADB found it running:
+adb devices # Anywhere in the terminal
+
+# This done now lets bundle, build and start the application with:
 # using npm (npx)
 npx react-native run-android
 
 # OR using Yarn
 yarn android
+
+
 ```
 
 ### For iOS
