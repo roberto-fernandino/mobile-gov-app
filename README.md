@@ -20,8 +20,9 @@ First, you will need to start **Metro**, the JavaScript _bundler_ that ships _wi
 To start Metro, run the following command from the _root_ of your React Native project:
 
 ```bash
-# using npm
+# using npm (npx is the npx executioner built for react applications)
 npx react-native start
+# if ask to install dependencies press (Y) and ENTER for all them.
 
 # OR using Yarn
 yarn start
