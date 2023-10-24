@@ -3,6 +3,13 @@ By the way i used [**Django Rest Framework**](https://www.django-rest-framework.
 
 # Getting Started
 
+## Step 0: Clone the project to any directory
+
+```bash
+
+git clone https://github.com/roberto-fernandino/mobile-gov-app.git
+```
+
 > **Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
 > Make sure you have at least 3.11.4 python version installed.
 
