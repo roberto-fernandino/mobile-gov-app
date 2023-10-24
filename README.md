@@ -3,11 +3,13 @@ By the way i used [**Django Rest Framework**](https://www.django-rest-framework.
 
 # Getting Started
 
-## Step 0: Clone the project to any directory
+## Step 0: Clone the project to any directory and install dependencies.
 
 ```bash
 
 git clone https://github.com/roberto-fernandino/mobile-gov-app.git
+cd mobile-gov-app
+npm install
 ```
 
 > **Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
