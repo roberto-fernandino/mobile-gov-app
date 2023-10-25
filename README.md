@@ -296,7 +296,6 @@ Agora vamos chechar qual é a daemon:
 
 2nd caminho pra corrigir:
 
-JUST STOP USING WINDOWS SERIOUSLY, WHAT ARE U DOING ? ? ? Buy a macbook or simply and better install any Linux distro and learn how this magic OS works, i sware it will make you more inteligent and a fkcing REAL developer.
 APENAS PARE DE USAR WINDOWS SINCERAMENTE, O QUE EXATAMENTE VOCE TA FAZENDO ??? Compre um macbook ou simplesmente e até melhor instale qualquer Distribuição Linux e aprenda como esse OS magico funciona, eu juro que isso vai te tornar uma pessoa mais inteligente e a porra de um Desenvolvedor de verdade.
 
 Para iOS:
