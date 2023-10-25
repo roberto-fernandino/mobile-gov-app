@@ -7,6 +7,11 @@ from .models import Usuario, Informações, Endereco
 class UsuarioAdmin(admin.ModelAdmin):
     list_display = ["cpf", "nome", "email"]
     list_display_links = ["cpf"]
+    date_hierarchy = "created_at"
+    search_fields = ["nome", "cpf", "email"]
+    ordering = ["-last_login"]
+    filter_horizontal = ["user_permissions"]
+    list_filter = ["is_verified"]
 
 
 @admin.register(Informações)
@@ -32,6 +37,7 @@ class EndereçoAdmin(admin.ModelAdmin):
         "complemento",
     ]
     list_display_links = ["cpf_usuario"]
+    search_fields = ["cpf_usuario", "cidade", "bairro"]
 
     def cpf_usuario(self, obj):
         return obj.usuario.cpf
