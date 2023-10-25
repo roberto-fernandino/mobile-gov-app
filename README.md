@@ -209,6 +209,22 @@ rm node_modules/rn-fetch-blob/react-native.config.js
 npm cache clean -f
 ```
 
+### Para executar no IOS
+Instale cocoapods seguindo o [*guia*](https://cocoapods.org/)
+obs. Você só pode rodar IOS em um macOS com Xcode instalado, já que não estamos usando o Expo, o Expo não é bom para aplicativos profissionais.
+```bash
+
+cd ios
+# Rode
+
+gem uninstall cocoapods activesupport
+gem install activesupport -v 6.0.0
+gem install cocoapods
+pod install
+
+# Agora você espera e se quiser pode rodar a aplicação no IOS
+```
+
 ## Passo 1: Iniciando os Servidores
 
 Primeiro, você precisará iniciar o **Metro**, o _bundler_ JavaScript que vem _com_ o React Native.
