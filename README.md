@@ -24,8 +24,23 @@ rm .\node_modules\rn-fetch-blob\react-native.config.js
 rm node_modules/rn-fetch-blob/react-native.config.js
 
  # And finally
-npm cache clean -f
+npm cache clean -f 
 
+```
+
+### To run IOS
+Install cocoapods following the [*guide*](https://cocoapods.org/)
+obs. U can only run IOS in a macOS with Xcode installed since we are not using Expo reason, Expo is not good for professional Applications.
+```bash
+# Now
+cd ios
+# Run 
+gem uninstall cocoapods activesupport
+gem install activesupport -v 6.0.0
+gem install cocoapods
+pod install
+
+# Now you wait and if u want u can run the application in IOS
 ```
 
 
