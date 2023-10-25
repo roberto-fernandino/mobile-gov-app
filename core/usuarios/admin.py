@@ -24,6 +24,7 @@ class InformaçõesAdmin(admin.ModelAdmin):
         "nivel_escolaridade",
     ]
     list_display_links = ["usuario"]
+    list_filter = ["renda", "despesas_mensais", "nivel_escolaridade"]
 
 
 @admin.register(Endereco)
